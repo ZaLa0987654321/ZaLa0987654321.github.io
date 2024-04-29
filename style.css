@@ -1,69 +1,29 @@
-/* Material Design CSS */
-
-/* Typography */
 body {
-    font-family: 'Roboto', sans-serif;
+  background-color: black;
+  color: lime;
+  font-family: 'Courier New', monospace;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 500;
+a {
+  color: green;
 }
 
-/* Colors */
-.primary-color {
-    color: #2196F3;
+h1, h2, h3 {
+  color: lime;
 }
 
-.secondary-color {
-    color: #FF4081;
+p {
+  color: white;
 }
 
-/* Buttons */
+input[type="text"], input[type="password"] {
+  background-color: black;
+  color: lime;
+  border: 1px solid lime;
+}
+
 button {
-    background-color: #2196F3;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #1976D2;
-}
-
-/* Cards */
-.card {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 5px;
-    padding: 20px;
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.card-content {
-    font-size: 16px;
-}
-
-/* Form Inputs */
-.input-field {
-    margin-bottom: 20px;
-}
-
-.input-field label {
-    font-size: 16px;
-}
-
-.input-field input {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.input-field input:focus {
-    border-color: #2196F3;
+  background-color: black;
+  color: lime;
+  border: 1px solid lime;
 }
