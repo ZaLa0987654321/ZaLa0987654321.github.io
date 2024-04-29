@@ -5,14 +5,17 @@ body {
 
 a {
   color: green;
+  text-align: center;
 }
 
 h1, h2, h3 {
   color: lime;
+  text-align: center;
 }
 
 p {
-  color: white;
+  color: light-gray;
+  text-align: center;
 }
 
 input[type="text"], input[type="password"] {
