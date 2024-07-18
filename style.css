@@ -21,6 +21,12 @@ h1, h2, h3 {
   text-align: center;
 }
 
+h3 {
+  font-family: "Comforter", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 p {
   color: black;
   text-align: center;
@@ -50,3 +56,9 @@ button {
 .philosopher-bold-italic {
   font-family: "Philosopher", sans-serif;  font-weight: 700;
   font-style: italic;}
+.comforter-regular {
+  font-family: "Comforter", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
