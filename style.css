@@ -65,3 +65,11 @@ button {
   font-size: 32px;
 }
 
+.info {
+  font-family: "Bad Script", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: rgb(170, 170, 170);
+}
+
+
