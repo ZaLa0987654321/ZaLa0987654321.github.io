@@ -1,9 +1,9 @@
 html, body {
-  height: max-content;
+  height: 100%;
 }
 body {
   background: rgb(183,212,221);
-  background: linear-gradient(11deg, rgba(183,212,221,1) 0%, rgba(255,255,255,1) 80% no-repeat);
+  background: linear-gradient(11deg, rgba(183,212,221,1) 0%, rgba(255,255,255,1) 80%) no-repeat;
 }
 
 a {
