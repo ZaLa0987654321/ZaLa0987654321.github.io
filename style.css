@@ -33,6 +33,11 @@ p {
   text-align: center;
 }
 
+.btmimg {
+  position:relative;
+  bottom:-10px;
+}
+
 input[type="text"], input[type="password"] {
   background-color: black;
   color: lime;
