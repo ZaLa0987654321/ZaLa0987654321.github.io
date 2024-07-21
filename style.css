@@ -1,13 +1,21 @@
 html, body {
   height: 100%;
 }
+html {
+  background: rgb(255,255,255) no-repeat;
+  background: -moz-linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
+  background: -webkit-linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
+  background: linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
+}
 body {
   background: rgb(255,255,255) no-repeat;
   background: -moz-linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
   background: -webkit-linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
   background: linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
+  margin: 0px;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7d4dd",endColorstr="#ffffff",GradientType=1);
-  font-family: "Philosopher", sans-serif;
+  
+ font-family: "Philosopher", sans-serif;
   font-weight: 700;  font-style: normal;
 }
 
@@ -83,6 +91,7 @@ button {
   font-weight: 400;
   font-style: normal;
   color: rgb(100, 100, 100);
+  margin: 16px;
 }
 
 
