@@ -35,6 +35,8 @@ p {
 
 .btmimg {
   width: 55%;
+  min-width: 100px;
+  max-width: 200px;
 }
 
 img {
@@ -42,8 +44,6 @@ img {
 }
 
 .btmimg-parent-div {
-  width: fit-content;
-  max-width: 100%;
 }
 
 input[type="text"], input[type="password"] {
