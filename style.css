@@ -7,7 +7,7 @@ body {
   background: -webkit-linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
   background: linear-gradient(11deg, rgba(183,212,221,1) 30%, rgba(255,255,255,1) 80%) no-repeat;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#b7d4dd",endColorstr="#ffffff",GradientType=1);
-  family: "Philosopher", sans-serif;
+  font-family: "Philosopher", sans-serif;
   font-weight: 700;  font-style: normal;
 }
 
