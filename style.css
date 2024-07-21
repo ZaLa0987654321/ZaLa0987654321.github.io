@@ -34,7 +34,8 @@ p {
 }
 
 .btmimg {
-  bottom: 10px;
+  width: fit-content;
+  object-fit: contain;
 }
 
 img {
