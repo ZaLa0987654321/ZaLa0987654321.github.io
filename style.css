@@ -34,8 +34,8 @@ p {
 }
 
 .btmimg {
-  width: fit-content;
   object-fit: contain;
+  width: 55%;
 }
 
 img {
