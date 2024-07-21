@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+  <meta http-equiv='cache-control' content='no-cache'> 
+  <meta http-equiv='expires' content='0'> 
+  <meta http-equiv='pragma' content='no-cache'>
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <meta charset="utf-8" />
+  <title></title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <p><canvas id="canvas" width="400" height="400"></canvas></p>
+  <script type="text/javascript">
+    const canvasW = 400;
+    const canvasH = 400;
+
+    var playerX = canvasW/2;
+    var playerY = canvasH - 50;
+    var playerW = 20;
+    var playerH = 20;
+
+    var canChangePos = true;
+
+    var velocityX = 200 * (getRandomInt(5)-2);
+    var velocityY = 200 * (getRandomInt(5)-2);
+
+    var gravity = 3;
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const delta = 1/60.0;
+
+    var blocksPosX = [];
+    var blocksPosY = [];
+    var blocksHP = [];
+    var blocksMHP = [];
+    var blocksScale = [];
+
+    var blocks = 0;
+    var blockW = 30;
+    var blockH = 30;
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
+    function addBlock(x, y) {
+      blocksPosX.push(x);
+      blocksPosY.push(y);
+      blocksMHP.push(getRandomInt(10) + 1);
+      blocksHP.push(blocksMHP[blocksMHP.length - 1])
+      blocksScale.push(1);
+      blocks += 1;
+    }
+
+    function process() {
+      if (Math.abs(velocityX) < 20) {
+        velocityX = 140 * (getRandomInt(5)-2);
+      }
+      if (velocityY > -20 && velocityY < 0) {
+        velocityY = 140 * (getRandomInt(5)-2);
+      }
+      if (Math.abs(velocityY) > 750) {
+        velocityY = (velocityY / Math.abs(velocityY)) * 750;
+      }
+      velocityX -= (velocityX / Math.abs(velocityX)) * 0.1;
+      if (playerY + playerH < canvasH) {
+        velocityY += gravity;
+      }
+      else if (playerY + playerH > canvasH) {
+        playerY = canvasH - playerH
+      }
+
+      playerX += velocityX * delta;
+      playerY += velocityY * delta;
+
+      if (playerX + playerW > canvasW) {
+        velocityX *= -1;
+      }
+      if (playerX < 0) {
+        velocityX *= -1;
+      }
+      if (playerY + playerH > canvasH) {
+        velocityY *= -0.95;
+      }
+      if (playerY < 0) {
+        velocityY *= -1.2;
+      }
+
+      for (var i = blocks; i >= 0; i--) {
+        if (playerX + playerW/2 > blocksPosX[i] && playerX + playerW/2 < blocksPosX[i] + blockW && playerY + playerH > blocksPosY[i] && playerY + playerH < blocksPosY[i] + blockH && velocityY > 0) {
+          velocityY *= -0.98;
+          blockDamage(i, 1);
+        }
+        if (playerY + playerH/2 > blocksPosY[i] && playerY + playerH/2 < blocksPosY[i] + blockH && playerX < blocksPosX[i] + blockW && playerX > blocksPosX[i] && velocityX < 0) {
+          velocityX *= -1;
+          blockDamage(i, 1);
+        }
+        if (playerY + playerH/2 > blocksPosY[i] && playerY + playerH/2 < blocksPosY[i] + blockH && playerX + playerW > blocksPosX[i] && playerX < blocksPosX[i] && velocityX > 0) {
+          velocityX *= -1;
+          blockDamage(i, 1);
+        }
+        if (playerX + playerW/2 > blocksPosX[i] && playerX + playerW/2 < blocksPosX[i] + blockW && playerY < blocksPosY[i] + blockH && playerY > blocksPosY[i] && velocityY < 0) {
+          velocityY *= -1.08;
+          blockDamage(i, 1);
+        }
+      }
+    }
+
+    function blockDamage(id, dmg) {
+      blocksHP[id] -= dmg;
+      blocksScale[id] -= 1/(blocksMHP[id]+1);
+      if (blocksHP[id] <= 0) {
+        blocksPosX.splice(id, 1);
+        blocksPosY.splice(id, 1);
+        blocksMHP.splice(id, 1);
+        blocksHP.splice(id, 1);
+        blocksScale.splice(id, 1);
+        blocks -= 1;
+        if (blocks <= 0) {
+          canvas.remove();
+        }
+      }
+    }
+
+    function draw() {
+      ctx.fillStyle = "rgb(255 255 255 / 20%)";
+      ctx.fillRect(0, 0, canvasW, canvasH);
+      ctx.fillStyle = "rgb(20 100 200)";
+      ctx.fillRect(playerX, playerY, playerW, playerH);
+
+      for (var i = blocks; i >= 0; i--) {
+        const clr = blocksHP[i]*(100/blocksMHP[i]) + 100;
+        ctx.fillStyle = "rgb(" + clr.toString() + " 0 0)";
+        ctx.fillRect(blocksPosX[i] + (blockW * (1 - blocksScale[i]))/2, blocksPosY[i] + (blockH * (1 - blocksScale[i]))/2, blockW * blocksScale[i], blockH * blocksScale[i]);
+      }
+    }
+
+    function mainCycle() {
+      window.setInterval(function(){
+        process();
+        draw();
+      }, delta*1000);
+    }
+
+    for (var j = 5; j >= 0; j--) {
+      for (var i = 10; i >= 0; i--) {
+        addBlock(i * (blockW + 4), j * (blockH + 4));
+      }
+    }
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect()
+        const x = event.clientX - rect.left
+        const y = event.clientY - rect.top
+        console.log("x: " + x + " y: " + y)
+        playerX = x - playerW/2;
+        playerY = Math.max(y, canvasH - canvasH/3) - playerH/2;
+    }
+
+    canvas.addEventListener('mousedown', function(e) {
+        getCursorPosition(canvas, e)
+    })
+    mainCycle();
+  </script>
+</body>
+</html>
