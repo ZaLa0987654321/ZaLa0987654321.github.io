@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+  <meta http-equiv='cache-control' content='no-cache'> 
+  <meta http-equiv='expires' content='0'> 
+  <meta http-equiv='pragma' content='no-cache'>
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <meta charset="utf-8" />
+  <title>ЦБРФ</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h3><b>Царь Батюшка</b> РФ</h3>
+  <p class="info">- Это Государственный веб-ресурс Царя Батюшки. Правителя всея Руси матушки нашей. Правит он честно и с доблестью всей. -</p>
+  <div class="btmimg-parent-div">
+    <p>Наш <a href="https://zala0987654321.github.io/batya.html">Государь Батюшка</a></p>
+    <p>Священные <a href="https://zala0987654321.github.io/zek.html">Законы Батюшки</a></p>
+    <p>Топ 10 <a href="https://zala0987654321.github.io/ban.html">хлопцев в черном списке</a></p>
+    <p><a href="https://youtu.be/kIy7oathtVM?si=t1K-rLmOkcgUEVed">Увлечение Царя Батюшки</a></p>
+    <p><a href="https://zala0987654321.github.io/happybirthday.html"><img class="btmimg" src="https://zala0987654321.github.io/ukrasheniehb.png" alt="Красивое Оформление" ></a></p>
+  </div>
+</body>
+</html>
