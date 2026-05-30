@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CRITICAL_SYSTEM_ERROR</title>
+    <style>
+        /* Жесткий системный стиль без полос прокрутки */
+        html, body {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #000000; /* Полностью черный экран */
+            color: #aaaaaa; /* Тусклый серый текст, как в старых консолях */
+            font-family: "Lucida Console", "Consolas", monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow: hidden; 
+            -ms-overflow-style: none; 
+            user-select: none;
+            text-transform: uppercase;
+        }
+
+        .console-screen {
+            padding: 4% 6%;
+            max-width: 900px;
+        }
+
+        .system-header {
+            color: #ffffff;
+            font-weight: bold;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .alert-text {
+            color: #d11a1a; /* Глубокий тревожный красный цвет */
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .log-line {
+            color: #555555; /* Полупрозрачный цвет для фоновых логов */
+        }
+
+        .status-ok { color: #00aa00; }
+        .status-fail { color: #ff0000; }
+
+        /* Блок таймера встроен прямо в текстовый поток */
+        .timer-line {
+            margin: 30px 0;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        #countdown { color: #ff0000; }
+
+        /* Строгая утилитарная панель ввода кода */
+        .input-line {
+            margin-top: 40px;
+            color: #ffffff;
+        }
+
+        input[type="password"] {
+            background-color: #000000;
+            color: #00ff00; /* Зеленый курсор ввода */
+            border: 1px solid #444444;
+            font-family: monospace;
+            font-size: 16px;
+            padding: 4px 8px;
+            width: 180px;
+            outline: none;
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #111111;
+            color: #aaaaaa;
+            border: 1px solid #444444;
+            font-family: monospace;
+            font-size: 14px;
+            padding: 4px 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+        #error-msg {
+            color: #ff0000;
+            margin-top: 15px;
+            height: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="console-screen">
+    <div class="system-header">
+        CORE_KERNEL_STATUS: HALTED // SUBSYSTEM_LOCKDOWN_INITIATED
+    </div>
+
+    <p class="log-line">[0.00124] STORAGE RE-MAPPING ... <span class="status-ok">SUCCESS</span></p>
+    <p class="log-line">[0.00351] VOLUMES C:\ D:\ IDENTIFIED ... <span class="status-ok">ISOLATED</span></p>
+    <p class="log-line">[0.00489] MASTER BOOT RECORD ACCESS ... <span class="status-fail">DENIED_BY_USER_0x4F</span></p>
+    
+    <div class="alert-text">
+        [!] ATTENTION: THE FILE SYSTEM HAS BEEN FORCE-ENCRYPTED BY EXTERNAL HOST.<br>
+        ALGORITHM: AES-XTS-512. PRIV-KEY IS HELD ON REMOTE COMMAND SERVER.<br>
+        ANY TERMINATION OF SYSTEM SERVICES OR HARDWARE REBOOT WILL DESTROY THE MEMORY RESIDENT DECRYPTION TABLE, RESULTING IN AN UNRECOVERABLE DATA LOSS STATE.
+    </div>
+
+    <p class="log-line">[SYS] THREAD_DUMP: MEMORY CORRUPTION IN KERNEL32.DLL</p>
+    <p class="log-line">[SYS] SHADOW COPIES PURGED ... <span class="status-ok">100%</span></p>
+
+    <div class="timer-line">
+        TIME_UNTIL_SECTOR_WIPE: [<span id="countdown">00:15</span>]
+    </div>
+
+    <div class="input-line">
+        ENTER EMERGENCY DECRYPTION KEY:<br><br>
+        <input type="password" id="code-input" placeholder="0x00000000" autocomplete="off">
+        <button onclick="checkCode()">EXECUTE</button>
+        <div id="error-msg"></div>
+    </div>
+</div>
+
+<script>
+    // ВРЕМЯ ДЛЯ ТЕСТА: 15 секунд. Измените на 600 для реального розыгрыша (10 минут).
+    let time = 600; 
+    
+    // Файл-приемник, куда перенаправит друга после обнуления таймера
+    const redirectUrl = "video.html"; 
+
+    const countdownEl = document.getElementById('countdown');
+    
+    const timer = setInterval(() => {
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        countdownEl.innerText = `${minutes}:${seconds}`;
+        
+        if (time <= 0) {
+            clearInterval(timer);
+            countdownEl.innerText = "00:00";
+            // Автоматическое перенаправление на страницу с видео
+            window.location.href = redirectUrl;
+        } else {
+            time--;
+        }
+    }, 1000);
+
+    function checkCode() {
+        const input = document.getElementById('code-input').value;
+        const errMsg = document.getElementById('error-msg');
+        
+        // Правильный код для безопасной разблокировки: 1234
+        if (input === '1234') {
+            window.close(); 
+        } else {
+            errMsg.innerText = "[ERROR] INVALID KEY. TABLE OVERWRITE ACCELERATED.";
+            document.getElementById('code-input').value = '';
+            time = time - 60; // Штраф за ошибку — минус 1 минута
+            setTimeout(() => { errMsg.innerText = ''; }, 3000);
+        }
+    }
+</script>
+
+</body>
+</html>
