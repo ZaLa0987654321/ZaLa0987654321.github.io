@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- ЭТА СТРОКА ОВЕЧАЕТ ЗА СНЯТИЕ ОГРАНИЧЕНИЙ И ИСПРАВЛЕНИЕ МАСШТАБА В IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
     <meta charset="UTF-8">
     <title>CRITICAL_SYSTEM_ERROR</title>
     <style>
-        /* Жесткий системный стиль без полос прокрутки */
         html, body {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            background-color: #000000; /* Полностью черный экран */
-            color: #aaaaaa; /* Тусклый серый текст, как в старых консолях */
+            background-color: #000000;
+            color: #aaaaaa;
             font-family: "Lucida Console", "Consolas", monospace;
             font-size: 14px;
             line-height: 1.5;
@@ -32,19 +34,15 @@
         }
 
         .alert-text {
-            color: #d11a1a; /* Глубокий тревожный красный цвет */
+            color: #d11a1a;
             font-weight: bold;
             margin: 20px 0;
         }
 
-        .log-line {
-            color: #555555; /* Полупрозрачный цвет для фоновых логов */
-        }
-
+        .log-line { color: #555555; }
         .status-ok { color: #00aa00; }
         .status-fail { color: #ff0000; }
 
-        /* Блок таймера встроен прямо в текстовый поток */
         .timer-line {
             margin: 30px 0;
             color: #ffffff;
@@ -52,7 +50,6 @@
         }
         #countdown { color: #ff0000; }
 
-        /* Строгая утилитарная панель ввода кода */
         .input-line {
             margin-top: 40px;
             color: #ffffff;
@@ -60,7 +57,7 @@
 
         input[type="password"] {
             background-color: #000000;
-            color: #00ff00; /* Зеленый курсор ввода */
+            color: #00ff00;
             border: 1px solid #444444;
             font-family: monospace;
             font-size: 16px;
@@ -106,11 +103,8 @@
     <div class="alert-text">
         [!] ATTENTION: THE FILE SYSTEM HAS BEEN FORCE-ENCRYPTED BY EXTERNAL HOST.<br>
         ALGORITHM: AES-XTS-512. PRIV-KEY IS HELD ON REMOTE COMMAND SERVER.<br>
-        ANY TERMINATION OF SYSTEM SERVICES OR HARDWARE REBOOT WILL DESTROY THE MEMORY RESIDENT DECRYPTION TABLE, RESULTING IN AN UNRECOVERABLE DATA LOSS STATE.
+        ANY TERMINATION OF SYSTEM SERVICES OR HARDWARE REBOOT WILL DESTROY THE DATA.
     </div>
-
-    <p class="log-line">[SYS] THREAD_DUMP: MEMORY CORRUPTION IN KERNEL32.DLL</p>
-    <p class="log-line">[SYS] SHADOW COPIES PURGED ... <span class="status-ok">100%</span></p>
 
     <div class="timer-line">
         TIME_UNTIL_SECTOR_WIPE: [<span id="countdown">00:15</span>]
@@ -125,25 +119,24 @@
 </div>
 
 <script>
-    // ВРЕМЯ ДЛЯ ТЕСТА: 15 секунд. Измените на 600 для реального розыгрыша (10 минут).
-    let time = 600; 
-    
-    // Файл-приемник, куда перенаправит друга после обнуления таймера
-    const redirectUrl = "video.html"; 
+    // Для теста 15 секунд. Измените на 600 для реального розыгрыша (10 минут).
+    var time = 15; 
+    var redirectUrl = "video.html"; 
 
-    const countdownEl = document.getElementById('countdown');
+    var countdownEl = document.getElementById('countdown');
     
-    const timer = setInterval(() => {
-        let minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
+    var timer = setInterval(function() {
+        var minutes = Math.floor(time / 60);
+        var seconds = time % 60;
+        
         minutes = minutes < 10 ? '0' + minutes : minutes;
-        countdownEl.innerText = `${minutes}:${seconds}`;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        
+        countdownEl.innerText = minutes + ":" + seconds;
         
         if (time <= 0) {
             clearInterval(timer);
             countdownEl.innerText = "00:00";
-            // Автоматическое перенаправление на страницу с видео
             window.location.href = redirectUrl;
         } else {
             time--;
@@ -151,17 +144,16 @@
     }, 1000);
 
     function checkCode() {
-        const input = document.getElementById('code-input').value;
-        const errMsg = document.getElementById('error-msg');
+        var input = document.getElementById('code-input').value;
+        var errMsg = document.getElementById('error-msg');
         
-        // Правильный код для безопасной разблокировки: 1234
         if (input === '1234') {
-            window.close(); 
+            window.close(); // В Internet Explorer эта команда закроет окно без проблем
         } else {
             errMsg.innerText = "[ERROR] INVALID KEY. TABLE OVERWRITE ACCELERATED.";
             document.getElementById('code-input').value = '';
-            time = time - 60; // Штраф за ошибку — минус 1 минута
-            setTimeout(() => { errMsg.innerText = ''; }, 3000);
+            time = time - 60; 
+            setTimeout(function() { errMsg.innerText = ''; }, 3000);
         }
     }
 </script>
