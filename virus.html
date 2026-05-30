@@ -120,7 +120,7 @@
 
 <script>
     // Для теста 15 секунд. Измените на 600 для реального розыгрыша (10 минут).
-    var time = 15; 
+    var time = 300; 
     var redirectUrl = "video.html"; 
 
     var countdownEl = document.getElementById('countdown');
@@ -147,7 +147,7 @@
         var input = document.getElementById('code-input').value;
         var errMsg = document.getElementById('error-msg');
         
-        if (input === '1234') {
+        if (input === 'happa') {
             window.close(); // В Internet Explorer эта команда закроет окно без проблем
         } else {
             errMsg.innerText = "[ERROR] INVALID KEY. TABLE OVERWRITE ACCELERATED.";
